@@ -3,29 +3,29 @@
 on:
   push:
     branches:
-      - main  # 监听 main 分支的推送
+      - main # 监听 main 分支的推送
   pull_request:
     branches:
-      - main  # 监听对 main 分支的 PR
+      - main # 监听对 main 分支的 PR
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # 指定运行环境
+    runs-on: ubuntu-latest # 指定运行环境
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2  # 检出代码
+        uses: actions/checkout@v2 # 检出代码
 
       - name: Log in to Docker Hub
-        uses: docker/login-action@v2  # 登录 Docker Hub
+        uses: docker/login-action@v2 # 登录 Docker Hub
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}  # 从 Secrets 中获取用户名
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}      # 从 Secrets 中获取 Token
+          username: ${{ secrets.DOCKER_HUB_USERNAME }} # 从 Secrets 中获取用户名
+          password: ${{ secrets.DOCKER_HUB_TOKEN }} # 从 Secrets 中获取 Token
 
       - name: Build Docker image
         run: |
-          docker build -t my-test-odbc:${{ github.sha }} .  # 构建 Docker 镜像
+          docker build -t qthen/my-test-odbc:${{ github.sha }} .  # 构建 Docker 镜像
 
       - name: Push Docker image
         run: |
-          docker push my-test-odbc:${{ github.sha }}  # 推送 Docker 镜像到 Docker Hub
+          docker push qthen/my-test-odbc:${{ github.sha }}  # 推送 Docker 镜像到 Docker Hub
