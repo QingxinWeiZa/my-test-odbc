@@ -24,10 +24,12 @@ COPY odbc.ini /etc/
 COPY odbcinst.ini /etc/
 
 # 复制发布的项目文件
-COPY ./publish ./
+COPY ./publish/* ./
 
 EXPOSE 80
 EXPOSE 443
+
+ENV ASPNETCORE_URLS="http://+:80;https://+:443"
 
 # 设置入口点
 ENTRYPOINT ["dotnet", "UslimWeb.dll"]
