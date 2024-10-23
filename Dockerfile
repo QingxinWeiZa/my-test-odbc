@@ -24,9 +24,14 @@ COPY odbc.ini /etc/
 COPY odbcinst.ini /etc/
 
 # 复制发布的项目文件
-COPY ./publish/* ./
+COPY ./publish ./
 
-EXPOSE 5000
+# 声明容器将要监听的端口
+EXPOSE 80
+EXPOSE 443
+
+# 设置环境变量，以确保 ASP.NET Core 应用监听 HTTP 和 HTTPS 端口
+ENV ASPNETCORE_URLS="http://+:80;https://+:443"
 
 # 设置入口点
 ENTRYPOINT ["dotnet", "UslimWeb.dll"]
