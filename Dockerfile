@@ -26,5 +26,8 @@ COPY odbcinst.ini /etc/
 # 复制发布的项目文件
 COPY ./publish ./
 
+EXPOSE 80
+EXPOSE 443
+
 # 设置入口点
 ENTRYPOINT ["dotnet", "UslimWeb.dll"]
