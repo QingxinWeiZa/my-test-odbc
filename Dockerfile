@@ -6,12 +6,19 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     unixodbc \
     unixodbc-dev \
+    curl \
+    libssl-dev \
+    libkrb5-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # 安装 Cloudera Impala ODBC 驱动程序
 COPY ClouderaODBC.deb /tmp/
-RUN dpkg -i /tmp/ClouderaODBC.deb || apt-get -y install -f \
-    && rm /tmp/mypackage.deb
+
+# 安装
+RUN dpkg -i /tmp/ClouderaODBC.deb
+
+# 删除安装包
+RUN rm /tmp/mypackage.deb
 
 COPY odbc.ini /etc/
 COPY odbcinst.ini /etc/
