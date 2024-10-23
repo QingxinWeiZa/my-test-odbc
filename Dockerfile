@@ -18,7 +18,7 @@ COPY ClouderaODBC.deb /tmp/
 RUN dpkg -i /tmp/ClouderaODBC.deb
 
 # 删除安装包
-RUN rm /tmp/mypackage.deb
+RUN rm /tmp/ClouderaODBC.deb
 
 COPY odbc.ini /etc/
 COPY odbcinst.ini /etc/
